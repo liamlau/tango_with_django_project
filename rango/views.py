@@ -15,6 +15,8 @@ def index(request):
 def about(request):
     context_dict = {"normalmessage": "Message from views.py!",
                     "aboutinfo": "Rango says here is the about page."}
+    print(request.method)
+    print(request.user)
     return render(request, "rango/about.html", context=context_dict)
 
 def show_category(request, category_name_slug):
@@ -43,7 +45,6 @@ def add_category(request):
         
         else:
             print(form.errors)
-        
     return render(request, "rango/add_category.html", {"form": form})
 
 def add_page(request, category_name_slug):
@@ -62,6 +63,7 @@ def add_page(request, category_name_slug):
                 page.views = 0
                 page.save()
                 return show_category(request, category_name_slug)
+
         else:
             print(form.errors)
         
